@@ -30,9 +30,16 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'product__product_name')  # Add search functionality
 
 
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('product_name', 'category', 'price')  # Show these fields in admin panel
+    list_filter = ('category',)  # Add filter by category
+    search_fields = ('product_name', 'category')  # Enable search
+
+admin.site.register(product, ProductAdmin)  # Register Product model with custom admin
+
 # Register the models with their respective configurations
 admin.site.register(Cart, CartAdmin)
-admin.site.register(product)
+
 admin.site.register(contact)
 admin.site.register(Order, OrderAdmin)  # Register Order with OrderAdmin
 admin.site.register(OrderItem)

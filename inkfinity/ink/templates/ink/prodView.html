@@ -44,27 +44,20 @@
 <div class="container my-5">
     <div class="row">
         <!-- Left Section: Image & Action Buttons -->
-        <div class="col-md-4">
-            <div class="card shadow-lg border-0">
-                <!-- Product Image with hover effect -->
-                <img src="/media/{{ products.image }}" class="card-img-top" alt="{{ products.product_name }}" width="350px" height="385px">
-                <div class="card-body text-center">
-                    <div class="d-flex justify-content-center mt-3">
-                        <span id="divpr{{ products.id }}" class="divpr">
-                            <button id="pr{{ products.id }}" class="btn btn-primary cart" onclick="addToCart({{ products.id }})">Add To Cart</button>
-                        </span>
-                    </div>
-                </div>
+            <div class="card shadow-lg prod-view-img ">
+                <img src="/media/{{ products.image }}" class="card-img-top" alt="{{ products.product_name }}" width="350px" height="385px"; border-radius="0px";>
             </div>
-        </div>
 
         <!-- Right Section: Product Details -->
-        <div class="col-md-8">
+        <div class="info-cont">
             <div class="product-details">
                 <h5 class="display-4 font-weight-bold">{{ products.product_name }}</h5>
                 <p class="text-muted"><b>Rs. {{ products.price }}</b></p>
                 <p class="text-justify">{{ products.desc }}</p>
             </div>
+            <span id="divpr{{ products.id }}" class="divpr">
+                <button id="pr{{ products.id }}" class="add-to-cart" onclick="addToCart({{ products.id }})">Add To Cart</button>
+            </span>
         </div>
     </div>
 </div>

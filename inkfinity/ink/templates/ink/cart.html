@@ -2,136 +2,125 @@
 {% load cart_extras %}
 {% load static %}
 {% block title %}Cart{% endblock title %}
+{% block css %}
+.product-image{
+  width: 100px;
+  height: 100px;
+}
+.cart-container{
+  diplay:table;
+  width:100%;
+}
+.all-cont{
+    border: 0.5px solid gray;
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom:100px;
+}
+.cart-head{
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.table-cont{
+  font-size: 25px;
 
+}
+.del-btn{
+    margin-top:30px;
+    width: 100%;
+    border: none;
+    background-color: #D9D9D9;
+    height: 40px;
+    font-weight: bold;
+}
+.del-btn:hover{
+  background-color: black;
+  color: gray;
+}
+
+.product-name{
+  display:flex;
+}
+
+.name{
+  margin-left:15px;
+}
+.total{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20px;
+}
+.checkout-btn-container{
+    width: 42%;
+    border: none;
+    background-color: #D9D9D9;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+    align-self: end;
+    padding: 8px;
+    margin-bottom: 20px;
+    color:black;
+}
+.proceed{
+  color:black;
+}
+
+{% endblock css %}
 {% block content %}
-<h2>Your Cart</h2>
+<h2 class="cart-head">Your Cart</h2>
 
 <!-- Cart Table -->
-<div class="cart-container">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total</th>
-        <th>Image</th>
-        <th>Action</th> <!-- Column for Delete Button -->
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in cart_items %}
-      <tr>
-        <td class="product-name">{{ item.product.product_name }}</td> <!-- Styled Product Name -->
-        <td>{{ item.quantity }}</td>
-        <td>₹{{ item.product.price }}</td>
-        <td>₹{{ item.product.price|multiply:item.quantity|floatformat:2 }}</td>
-        <td><img src="/media/{{ item.product.image }}" alt="{{ item.product.product_name }}" class="product-image"></td>
-        <td>
-          <!-- Delete Button (Pass cart_item id to the view for deletion) -->
-          <form action="{% url 'delete_cart_item' item.id %}" method="POST">
+ <div class="all-cont">
+  <div class="cart-container">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-cont">
+          <th>Products</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td class="product-name"><img  src="/media/{{ item.product.image }}" alt="{{ item.product.product_name }}" class="product-image"> <div class="name">{{ item.product.product_name }}({{ item.quantity }})</div></td> 
+          <td class="price">₹{{ item.product.price|multiply:item.quantity|floatformat:2 }} 
+            <form action="{% url 'delete_cart_item' item.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="del-btn">Delete</button>
           </form>
         </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
-<!-- Total Price -->
-<div class="total-price">
-  <h4>Total Price: ₹{{ total_price|floatformat:2 }}</h4>
-</div>
-
-<!-- Checkout Button -->
-<div class="checkout-btn-container">
-    <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+          <td>
+            <!-- Delete Button (Pass cart_item id to the view for deletion) -->
+            
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+  
+  <!-- Total Price -->
+   <div class="total" >
+    <div class="total-price">
+      <h4>Total Price: ₹{{ total_price|floatformat:2 }}</h4>
+    </div>
+    
+    <!-- Checkout Button -->
+    <div class="checkout-btn-container">
+        <a href="{% url 'checkout' %}" class="proceed">Proceed to Checkout</a>
+      </div>
+   </div>
+   </div>
+  
+
 
 {% endblock content %}
 
-{% block css %}
-<style>
-  .cart-container {
-    margin: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
 
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .table th, .table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
-  }
-
-  .table th {
-    background-color: #007BFF;
-    color: white;
-  }
-
-  .table td {
-    background-color: #fff;
-  }
-
-  .product-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    text-transform: capitalize;
-  }
-
-  .product-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .total-price {
-    text-align: right;
-    margin-top: 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #007BFF;
-  }
-
-  h2 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  .checkout-btn {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-  }
-
-  .btn-danger {
-    background-color: #FF5733;
-    color: white;
-  }
-
-  .btn-success {
-    background-color: #28a745;
-    color: white;
-  }
-</style>
-{% endblock css %}

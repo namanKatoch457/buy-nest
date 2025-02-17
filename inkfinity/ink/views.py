@@ -11,19 +11,34 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-
-    
     allProds = []
-    catProds = product.objects.values('category','id')
+    
+    # Get unique categories
+    catProds = product.objects.values('category', 'id')
     cats = {item['category'] for item in catProds}
-    for cat in cats:
-        prod = product.objects.filter(category = cat)
-        n = len(prod)
-        nSlides = n//4 + ceil((n/4)-(n//4))
-        allProds.append([prod, range(1,nSlides),nSlides])
 
-    params = {'allProds':allProds}
-    return render(request,'ink/index.html',params)
+    for cat in cats:
+        prod = product.objects.filter(category=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+
+    # 🔹 Get specific categories separately
+    new_products = product.objects.filter(category="new")
+    men_tshirt = product.objects.filter(category="men Tshirt")
+    women_collection = product.objects.filter(category="women collection")
+    watch = product.objects.filter(category="watch")
+
+    params = {
+        'allProds': allProds,  
+        'new_products': new_products,  
+        'men_tshirt': men_tshirt,  
+        'women_collection': women_collection,
+        'watch':watch
+    }
+    
+    return render(request, 'ink/index1.html', params)
+
 
 def about(request):
     return render(request,'ink/about.html')
@@ -87,17 +102,19 @@ def cart_view(request):
         return redirect('login') 
 
     
+from .forms import CustomUserCreationForm
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Log in the user immediately after registration
-            return redirect('home')  # Redirect to the home page or another page
+            login(request, user)  # Log in the user after registration
+            return redirect('home')  # Redirect to home or another page
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'ink/register.html', {'form': form})
+
 
 
 

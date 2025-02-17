@@ -1,0 +1,118 @@
+{% extends "ink/base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<div class="conatiner">
+    <div class="heading">
+        <h1>NEW</h1>
+        <h1>COLLECTION</h1>
+        <P>SUMMER</P>
+        <P>2025</P>
+    </div>
+    <div class="img-boy">
+        <img class="boy" src="{% static 'man-rnhs-0068.jpg' %}" alt="">
+        <img class="boy" src="{% static 'girl.jpg' %}" >
+    </div>
+</div>
+
+<div class="container2">
+    <div class="heading2">
+        <h1>NEW</h1>
+        <h1>THIS WEEK</h1>
+    </div>
+    <div class="new-products-container">
+        {% for i in new_products %}
+            <div class="product-card">
+                <a href="/ink/products/{{i.id}}">
+                    <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                </a>
+               
+                <div class="info">
+                    <p class="product-name">{{ i.product_name }}</p>
+                    <p class="price">{{i.price}}</p>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </div>
+</div>
+
+<div  class="container3">
+    <div id="men-cont" class="heading3">
+        <h1>MENS</h1>
+        <h1>COLLECTION</h1>
+    </div>
+    <div class="new-products-container">
+        {% for i in men_tshirt %}
+            <div class="product-card">
+                <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                <div class="info">
+                    <p class="product-name">{{ i.product_name }}</p>
+                    <p class="price">{{i.price}}</p>
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div  class="container4">
+    <div id="women-cont" class="heading4">
+        <h1>WOMEN</h1>
+        <h1>COLLECTION</h1>
+    </div>
+    <div class="new-products-container">
+        {% for i in women_collection %}
+            <div class="product-card">
+                <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                <div class="info">
+                    <p class="product-name">{{ i.product_name }}</p>
+                    <p class="price">{{i.price}}</p>
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div  class="container5">
+    <div id="watch-cont" class="heading4">
+        <h1>WATCHES</h1>
+        <h1>COLLECTION</h1>
+    </div>
+    <div class="new-products-container">
+        {% for i in watch %}
+            <div class="product-card">
+                <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                <div class="info">
+                    <p class="product-name">{{ i.product_name }}</p>
+                    <p class="price">{{i.price}}</p>
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}
+
+{% block js %}
+    document.getElementById("men-btn").addEventListener("click",function(){
+    document.getElementById("men-cont").scrollIntoView({behavior:"smooth"});
+})
+document.getElementById("women-btn").addEventListener("click",function(){
+    document.getElementById("women-cont").scrollIntoView({behavior:"smooth"});
+})
+document.getElementById("watch-btn").addEventListener("click",function(){
+    document.getElementById("watch-cont").scrollIntoView({behavior:"smooth"});
+})
+
+
+{% endblock js %}
+

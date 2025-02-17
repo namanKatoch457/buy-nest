@@ -7,58 +7,114 @@
   
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- Adobe Fonts & Google Fonts -->
+  <link rel="stylesheet" href="https://use.typekit.net/your-correct-kit-id.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@519&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-  <!-- Custom CSS -->
-  <style>
-    {% block css %}
-    {% endblock css %}
+  <!-- FontAwesome 6 (for cart icon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+  <style> 
+    body {
+      font-family: "Beatrice Deck", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+      background-color: white;
+    }
+
+    #nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 18px;
+    }
+
+    #nav-links a, #nav-links p {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #nav-links p{
+      margin-top:16px
+    }
+
+    #logo {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    #cart-btn, .log-btn {
+      background-color: black;
+      color: white;
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    {% block css %}{% endblock css %}
   </style>
 </head>
 <body>
   {% load static %}
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      
-      <!-- Left-aligned Links -->
-      <div class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/ink/about">About Us</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="/ink/contact">Contact Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/ink/cart">Cart</a>
-        </li>
-      </div>
+  <nav class="navbar">
+    <!-- Navigation Links -->
+    <div id="nav-links">
+      <a href="{% url 'home' %}">Home</a>
+      <p id="men-btn">Men</p>
+      <p id="women-btn">Women</p>
+      <p id="watch-btn">Watches</p>
+    </div>
 
-      <!-- Centered Brand and Logo -->
-      <a class="navbar-brand mx-auto" href="/ink/">
-        <img src="{% static '#' %}" alt="your Logo" style="width: 35px; height: 35px; margin-right: 10px;">
-        BuyNest
+    <!-- Logo -->
+    <div id="logo">
+      <img class="logo" src="{% static 'ink/Untitled_Artwork.png' %}" alt="Your Logo">
+    </div>
+
+    <!-- Cart & Login -->
+    <div class="right-section">
+      <a href="{% url 'cart' %}">
+        <button id="cart-btn">Cart</button>
       </a>
 
-      <!-- Right-aligned Logout and Username -->
-      <div class="navbar-nav ms-auto">
-        {% if user.is_authenticated %}
-          <span class="nav-link text-center font-weight-bold" style="color: #f8f9fa; font-size: 1.2rem;">
-            Hello, {{ user.username }}!
-          </span>
-          <form method="post" action="{% url 'logout' %}" class="ml-2">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger" style="font-size: 1rem;">
-              Logout
-            </button>
-          </form>
-        {% else %}
-          <a class="btn btn-primary mx-2" href="{% url 'login' %}" style="font-size: 1.2rem;">
-            Login
-          </a>
-        {% endif %}
-      </div>
+      {% if user.is_authenticated %}
+        <span class="font-weight-bold">Hello, {{ user.username }}!</span>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="log-btn">Logout</button>
+        </form>
+      {% else %}
+        <a class="log-btn" href="{% url 'login' %}">Login</a>
+      {% endif %}
     </div>
   </nav>
 
@@ -75,18 +131,17 @@
 
   <!-- Page Content -->
   <div class="container mt-4">
-    {% block content %}
-    {% endblock content %}
+    {% block content %}{% endblock content %}
   </div>
 
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb5K5g7fS5SE/6QoxX6J81NzKKK/Qq+W3ROUB" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
   <script>
-    {% block js %}
-    {% endblock js %}
+    {% block js %}{% endblock js %}
   </script>
 </body>
 </html>

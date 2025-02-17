@@ -3,19 +3,55 @@
 {% block title %}
 Login
 {% endblock title %}
+{% block css %}
+.login-container{
+    margin: auto;
+    width: 50%;
+    padding: 30px;
+    border: 0.5px solid gray; 
+    
+}
+.log{
+    text-align:center;
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+}
+.form-cont{
+    margin-left:18%;
+    margin-top: 20px;
+    font-size: 24px;
+    
+ 
+}
+.login-btn{
+    width: 70%;
+    border: none;
+    background-color: #D9D9D9;
+    height: 40px;
+    font-weight: 900;
+    
+}
+.reg{
+    text-align:center;
+    margin-top: 10px;
+}
 
+
+{% endblock css %}
 {% block content %}
-<div class="container mt-5">
-    <h2>Login</h2>
-    <form method="post">
+<div class="login-container">
+    <h2 class="log">Login</h2>
+    <form class="form-cont" method="post">
+        
         {% csrf_token %}
         {{ form.as_p }}
         <div class="mb-3">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="login-btn">Login</button>
     </form>
 
-    <div class="mt-4">
+    <div class="reg">
         <p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
     </div>
 </div>
