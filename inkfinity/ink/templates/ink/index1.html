@@ -1,6 +1,116 @@
 {% extends "ink/base.html" %}
 {% load static %}
 {% block title %}Home{% endblock title %}
+{% block css %}
+.conatiner{
+    padding-top: 60px;
+    display: flex;
+    gap: 100px;
+    font-family: "Roboto", serif;
+   
+  }
+  .heading{
+    font-family: "Roboto", serif;
+  }
+  .img-boy{
+    display: flex;
+    gap:90px
+  }
+  .boy{
+    height:350px;
+    width: 300px;
+  }
+
+
+  .heading h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+}
+.heading p{
+    font-size: 25px;
+}
+
+
+
+/*conaitner2*/
+
+
+  .new-products-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 25px;
+
+}
+
+
+.heading2{
+    margin-top: 150px;
+}
+.heading2 h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+}
+
+.product-card {
+    width: calc(25% - 20px);
+    max-width: 300px; 
+    text-align: center;
+    
+}
+
+
+.img-new-col {
+    width: 270px;
+    height: 300px;
+    transition: transform 0.3s ease-in-out;
+  
+}
+
+.img-new-col:hover {
+    transform: scale(1.1);
+}
+
+
+.product-name{
+    float: left;
+    font-weight: 600;
+}
+.price{
+    float: right;
+    font-weight: 600;
+}
+
+
+
+
+/*conaitner3*/
+.heading3{
+    margin-top: 100px;
+}
+
+.heading3 h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+}
+
+
+/*conaitner4*/
+.heading4{
+    margin-top: 100px;
+}
+
+.heading4 h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+}
+
+
+
+{% endblock css %}
 {% block content %}
 <div class="conatiner">
     <div class="heading">
