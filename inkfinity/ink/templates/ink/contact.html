@@ -1,6 +1,22 @@
 {% extends "ink/base.html" %}
 {% load static %}
 {% block title %}contact{% endblock title %}
+{% block css %}
+.sub{
+  margin-top:30px;
+  width: 50%;
+    border: none;
+    background-color: #D9D9D9;
+    height: 40px;
+    font-weight: bold;
+    margin-left:120px;
+}
+@media (max-width: 768px) {
+  .sub{
+    margin-left:20px;
+  }
+}
+{% endblock css %}
 {% block content %}
 <form method = "post">
     {% csrf_token %}
@@ -21,6 +37,6 @@
       <input type="text" class="form-control" id="name" name="desc" placeholder="please tell your problem here..." >
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="sub">Submit</button>
   </form>
 {% endblock content %}

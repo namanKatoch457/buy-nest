@@ -82,6 +82,46 @@
       cursor: pointer;
     }
     
+
+    @media (max-width: 768px) {
+      #nav-links {
+          display: flex;
+          font-size: 15px;
+          gap:70px;
+      }
+      #logo{
+        display:none;
+      }
+      #logo1 img{
+        width: 50px;
+        height: 50px;
+      }
+      .navbar{
+        flex-direction: column;
+      }
+      .right-section{
+        gap: 40px;
+      }
+
+    }
+
+    @media (min-width: 769px) {
+      #logo1{
+        display:none;
+      }
+  }
+
+
+  #about a{
+    text-decoration:none;
+    color:black;
+  }
+  #contact a{
+    text-decoration:none;
+    color:black;
+  }
+  
+    
     {% block css %}{% endblock css %}
   </style>
 </head>
@@ -90,6 +130,10 @@
 
   <!-- Navbar -->
   <nav class="navbar">
+
+    <div id="logo1">
+      <img class="logo" src="{% static 'Untitled_Artwork.png' %}" alt="Your Logo">
+    </div>
     <!-- Navigation Links -->
     <div id="nav-links">
       <a href="{% url 'home' %}">Home</a>
@@ -100,7 +144,7 @@
 
     <!-- Logo -->
     <div id="logo">
-      <img class="logo" src="{% static 'ink/Untitled_Artwork.png' %}" alt="Your Logo">
+      <img class="logo" src="{% static 'Untitled_Artwork.png' %}" alt="Your Logo">
     </div>
 
     <!-- Cart & Login -->
@@ -136,6 +180,89 @@
   <div class="container mt-4">
     {% block content %}{% endblock content %}
   </div>
+
+
+  {% comment %} footer {% endcomment %}
+  <footer class="text-center bg-body-tertiary">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a
+          data-mdb-ripple-init
+          class="btn btn-link btn-floating btn-lg text-body m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a
+          data-mdb-ripple-init
+          class="btn btn-link btn-floating btn-lg text-body m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+        <!-- Google -->
+        <a
+          data-mdb-ripple-init
+          class="btn btn-link btn-floating btn-lg text-body m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-google"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a
+          data-mdb-ripple-init
+          class="btn btn-link btn-floating btn-lg text-body m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a
+          data-mdb-ripple-init
+          class="btn btn-link btn-floating btn-lg text-body m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <!-- Github -->
+        <a
+          data-mdb-ripple-init
+          class="btn btn-link btn-floating btn-lg text-body m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+     <div id="about">
+      <a href="{% url 'aboutus' %}">About</a>
+     </div>
+     <div id="contact">
+      <a href="{% url 'contactus' %}">Contact</a>
+     </div>
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2020 Copyright:
+      <a class="text-body" href="https://mdbootstrap.com/">InkFinity</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -23,6 +23,21 @@
 .form-group{
   font-weight:bold;
 }
+
+@media (max-width: 768px) {
+  .check-cont{
+    flex-direction: column-reverse;
+  }
+  .checkout{
+    margin-left: 0px;
+    height: auto;
+  }
+  .details{
+    width: 350px;
+    margin-top:20px;
+}
+
+}
 {% endblock css %}
 {% load cart_extras %}
 {% block content %}

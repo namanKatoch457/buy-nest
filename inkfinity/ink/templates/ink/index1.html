@@ -36,11 +36,16 @@
 /*conaitner2*/
 
 
-  .new-products-container {
+.new-products-container {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 25px;
+    flex-wrap: wrap;
+    gap: 150px; /* Default large gap */
+    justify-content: center; /* Centers items */
+}
 
+/* Ensure 2 items per row */
+.new-products-container > * {
+    width: calc(50% - 75px); /* 2 items per row, accounting for gap */
 }
 
 
@@ -108,7 +113,95 @@
     letter-spacing: 1px;
 }
 
+@media (max-width: 768px){
+    .conatiner{
+        display: flex;
+        flex-direction: column;
+        font-family: "Roboto", serif;
+       
+      }
+      .heading{
+        font-family: "Roboto", serif;
+        text-align:center;
+      }
+      .img-boy{
+        display: flex;
 
+      }
+      .boy{
+        height: 250px;
+        width: 190px;
+      }
+    
+    
+      .heading h1 {
+        font-family: 'Anton', sans-serif;
+        font-size: 50px;
+        letter-spacing: 1px;
+    }
+    .heading p{
+        font-size: 25px;
+    }
+
+
+    {% comment %} container 2 {% endcomment %}
+    
+    
+    @media (max-width: 768px) {
+        .new-products-container {
+            gap: 25px; /* Reduce gap for smaller screens */
+        }
+    
+        .new-products-container > * {
+            width: calc(50% - 12.5px); /* Keep 2 items per row */
+        }
+    
+        .heading2 {
+            margin-top: 100px; /* Adjust margin */
+            text-align: center; /* Center align heading */
+        }
+    
+        .heading2 h1 {
+            font-size: 35px; /* Reduce font size */
+            letter-spacing: 0.5px;
+        }
+    
+        .img-new-col {
+            width: 150px; 
+            height: 170px;
+        }
+    
+        .product-name, .price {
+            float: none;
+            text-align: center;
+        }
+
+
+        .heading3{
+            margin-top: 100px; 
+            text-align: center; 
+        }
+        
+        .heading3 h1 {
+            font-size: 35px; 
+            letter-spacing: 0.5px;
+        }
+        
+
+        .heading4{
+            margin-top: 100px; 
+            text-align: center; 
+        }
+        
+        .heading4 h1 {
+            font-size: 35px; 
+            letter-spacing: 0.5px;
+        }
+    }
+    
+
+
+}
 
 {% endblock css %}
 {% block content %}
@@ -139,7 +232,7 @@
                
                 <div class="info">
                     <p class="product-name">{{ i.product_name }}</p>
-                    <p class="price">{{i.price}}</p>
+                    <p class="price">₹{{i.price}}</p>
                 </div>
             </div>
         {% endfor %}
@@ -155,7 +248,9 @@
     <div class="new-products-container">
         {% for i in men_tshirt %}
             <div class="product-card">
-                <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                <a href="/ink/products/{{i.id}}">
+                    <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                </a>
                 <div class="info">
                     <p class="product-name">{{ i.product_name }}</p>
                     <p class="price">{{i.price}}</p>
@@ -174,7 +269,9 @@
     <div class="new-products-container">
         {% for i in women_collection %}
             <div class="product-card">
-                <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                <a href="/ink/products/{{i.id}}">
+                    <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                </a>
                 <div class="info">
                     <p class="product-name">{{ i.product_name }}</p>
                     <p class="price">{{i.price}}</p>
@@ -194,7 +291,9 @@
     <div class="new-products-container">
         {% for i in watch %}
             <div class="product-card">
-                <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                <a href="/ink/products/{{i.id}}">
+                    <img class="img-new-col" src="/media/{{ i.image }}" alt="{{ i.name }}">
+                </a>
                 <div class="info">
                     <p class="product-name">{{ i.product_name }}</p>
                     <p class="price">{{i.price}}</p>
